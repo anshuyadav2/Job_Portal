@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Find Your Dream Job{% endblock %}
+
+{% block content %}
+    <header class="p-5 mb-4 bg-light rounded-3 text-center shadow-sm">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome to the Job Portal!</h1>
+            <p class="col-md-8 fs-4 mx-auto">Find your next career opportunity or hire top talent with ease.</p>
+            <div class="mt-4">
+                <a class="btn btn-primary btn-lg me-3" href="{{ url_for('view_jobs') }}" role="button">🚀 Browse Jobs</a>
+                {% if not session.loggedin %}
+                    <a class="btn btn-success btn-lg" href="{{ url_for('register') }}" role="button">Join Now!</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-primary">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">For Students</h5>
+                    <p class="card-text">Access thousands of job listings. View your application history easily.</p>
+                    <a href="{{ url_for('register') }}" class="btn btn-outline-primary btn-sm">Register as Student</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-success">
+                <div class="card-body">
+                    <h5 class="card-title text-success">For Employers</h5>
+                    <p class="card-text">Post job openings and manage your applicants all in one dashboard.</p>
+                    <a href="{{ url_for('register') }}" class="btn btn-outline-success btn-sm">Register as Employer</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-info">
+                <div class="card-body">
+                    <h5 class="card-title text-info">All Jobs</h5>
+                    <p class="card-text">Explore our current job openings across various locations and industries.</p>
+                    <a href="{{ url_for('view_jobs') }}" class="btn btn-outline-info btn-sm">View All Listings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

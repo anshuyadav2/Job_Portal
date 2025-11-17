@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4 text-success">Welcome to Your Student Dashboard, {{ user.name }}!</h2>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card text-white bg-primary h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Explore Opportunities</h5>
+                    <p class="card-text">Find new listings posted by top companies.</p>
+                    <a class="btn btn-light" href="{{ url_for('view_jobs') }}">Browse Jobs</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card text-white bg-info h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">My Applications</h5>
+                    <p class="card-text">Review the jobs you have applied for and track your submissions.</p>
+                    <a class="btn btn-light" href="{{ url_for('my_applications') }}">View My Applications</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

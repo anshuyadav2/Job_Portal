@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}{{ job.title }} - {{ job.company }}{% endblock %}
+
+{% block content %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('view_jobs') }}">Jobs</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ job.title }}</li>
+        </ol>
+    </nav>
+    
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h3 mb-0">{{ job.title }}</h1>
+        </div>
+        <div class="card-body">
+            <h2 class="h5 card-subtitle mb-3 text-muted">{{ job.company }}</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <p class="mb-1"><strong><i class="bi bi-geo-alt-fill"></i> Location:</strong> {{ job.location or 'Remote / Flexible' }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1"><strong><i class="bi bi-currency-dollar"></i> Salary:</strong> {{ job.salary or 'Competitive' }}</p>
+                </div>
+            </div>
+            
+            <hr>
+            
+            <h4>Job Description</h4>
+            <div class="card bg-light p-3">
+                <p class="card-text">{{ job.description|safe }}</p>
+            </div>
+            
+            <hr>
+            
+            {% if user and user.role == 'student' %}
+                {% if has_applied %}
+                    <div class="alert alert-success" role="alert">
+                         Applied! You have already submitted an application for this job.
+                    </div>
+                    <a href="{{ url_for('my_applications') }}" class="btn btn-outline-success">View My Applications</a>
+                {% else %}
+                    <h4 class="mt-4">Ready to Apply?</h4>
+                    <a href="{{ url_for('apply_job', job_id=job.id) }}" class="btn btn-lg btn-warning">
+                        Apply Now
+                    </a>
+                {% endif %}
+            {% elif user and user.role == 'employer' %}
+                <div class="alert alert-info" role="alert">
+                    As an Employer, you cannot apply. This job was posted by another company.
+                </div>
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                    Please <a href="{{ url_for('login') }}">log in</a> as a Student to apply for this job.
+                </div>
+            {% endif %}
+            
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Apply for {{ job.title }}{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg p-4">
+                <h2 class="card-title">Submit Application for:</h2>
+                <h3 class="h4 text-primary">{{ job.title }} at {{ job.company }}</h3>
+                <p class="text-muted">You are applying as {{ user.name }} ({{ user.role.capitalize() }}). Please ensure your details are correct.</p>
+                
+                <hr>
+
+                <form method="POST" action="{{ url_for('apply_job', job_id=job.id) }}">
+                    <div class="mb-4">
+                        <label for="resume_link" class="form-label h5">Resume Link <span class="text-danger">*</span></label>
+                        <input type="url" class="form-control form-control-lg" id="resume_link" name="resume" 
+                            placeholder="e.g., Google Drive, LinkedIn Profile, or public URL" required>
+                        <div class="form-text">Ensure the link is publicly accessible for the employer to view.</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success btn-lg w-100">
+                        <i class="bi bi-check-circle me-2"></i> Confirm & Submit Application
+                    </button>
+                    <a href="{{ url_for('job_detail', job_id=job.id) }}" class="btn btn-outline-secondary w-100 mt-2">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

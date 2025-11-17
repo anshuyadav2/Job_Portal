@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Post New Job{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow-lg p-4">
+            <h2 class="card-title text-center mb-4">Post a New Job Opening</h2>
+            <form method="POST" action="{{ url_for('post_job') }}">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Job Title <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="company" class="form-label">Company Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="company" name="company" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Job Description <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="description" name="description" rows="8" required></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" placeholder="e.g., Bangalore, Remote, Hybrid">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="salary" class="form-label">Salary Range</label>
+                        <input type="text" class="form-control" id="salary" name="salary" placeholder="e.g., ₹50,000 - ₹70,000 / year">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100 mt-3">Post Job</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

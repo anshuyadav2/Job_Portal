@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}View Applicants{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4">All Applicants for Your Posted Jobs</h2>
+
+    {% if applicants %}
+        <div class="list-group">
+            {% for app in applicants %}
+                <div class="list-group-item list-group-item-action shadow-sm mb-3">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1 text-primary">{{ app.candidate_name }}</h5>
+                        <small class="text-muted">Applied for: {{ app.title }}</small>
+                    </div>
+                    <p class="mb-1">
+                        Email: <a href="mailto:{{ app.candidate_email }}">{{ app.candidate_email }}</a><br>
+                        Applied On: {{ app.applied_at }}
+                    </p>
+                    <a href="{{ app.resume }}" target="_blank" class="btn btn-sm btn-info mt-2">
+                        View Resume/CV Link
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            No applications have been submitted for your jobs yet.
+        </div>
+    {% endif %}
+{% endblock %}
